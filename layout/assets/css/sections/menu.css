@@ -1,1 +1,43 @@
 .menu {}
+
+.menu__inner {
+    padding: 32px;
+    border: 1px solid rgb(0, 0, 0, 0.5);
+}
+
+.menu__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu__title {
+    font-size: 32px;
+    width: 50%;
+    border-bottom: 1px solid rgb(0, 0, 0, 0.5);
+}
+
+.menu__text {
+    width: 90%;
+    height: 100px;
+    resize: none;
+}
+
+.menu__more {}
+
+.menu__more-dot {
+    width: 10px;
+    height: 10px;
+    background: #000;
+    border-radius: 50%;
+}
+
+.menu__more-dot::before {}
+
+.menu__more-dot::after {
+    width: 10px;
+    height: 10px;
+    background: #000;
+    border-radius: 50%;
+    content: "";
+}
