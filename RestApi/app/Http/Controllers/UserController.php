@@ -13,16 +13,26 @@ class UserController extends Controller
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [
             'login' => 'required|max:255',
-            'email' => 'required|unique:users',
+            'email' => 'required',
             'password' => 'required'
         ]);
 
+        // Проверка всех введенных данных
         if($validator->fails()) {
             return response()->json([
                 'data' => [
                     'error'=> 'Неверно введены данные'
                 ]
             ],401);
+        }
+
+        // Проверка на занятость логина или пароля
+        if (User::where('login', $request->login)->OrWhere('email', $request->email)->first()) {
+            return response()->json([
+                'data' => [
+                    'error' => 'Введеный логин или Email уже заняты'
+                ]
+            ], 401);
         }
         User::create($request->all());
     }
