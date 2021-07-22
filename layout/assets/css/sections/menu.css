@@ -1,8 +1,10 @@
 .menu {}
 
 .menu__inner {
-    padding: 32px;
-    border: 1px solid rgb(0, 0, 0, 0.5);
+    padding: 32px 32px 24px 32px;
+    /* border: 1px solid rgb(0, 0, 0, 0.5); */
+    border-radius: 3px;
+    background: rgba(42, 54, 63, 0.299);
 }
 
 .menu__top {
@@ -14,7 +16,15 @@
 .menu__title {
     font-size: 32px;
     width: 50%;
-    border-bottom: 1px solid rgb(0, 0, 0, 0.5);
+    padding: 8px 16px 8px 12px;
+    background: rgba(42, 54, 63, 0.005);
+    border-bottom: 1px solid rgb(0, 0, 0, 0.3);
+    transition: ease 0.3s;
+    margin-bottom: 24px;
+}
+
+.menu__title:focus {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.7);
 }
 
 .menu__text {
@@ -23,21 +33,61 @@
     resize: none;
 }
 
-.menu__more {}
-
-.menu__more-dot {
-    width: 10px;
-    height: 10px;
-    background: #000;
-    border-radius: 50%;
+.menu__more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 30px;
+    width: 50px;
 }
 
-.menu__more-dot::before {}
+.menu__more-dot {
+    position: relative;
+    width: 5px;
+    height: 5px;
+    background: #000;
+    border-radius: 50%;
+    transition: ease 0.3s;
+}
 
-.menu__more-dot::after {
-    width: 10px;
-    height: 10px;
+.menu__more-dot::before {
+    position: absolute;
+    right: 8px;
+    width: 5px;
+    height: 5px;
     background: #000;
     border-radius: 50%;
     content: "";
+}
+
+.menu__more-dot::after {
+    position: absolute;
+    left: 8px;
+    width: 5px;
+    height: 5px;
+    background: #000;
+    border-radius: 50%;
+    content: "";
+}
+
+.menu__textarea {
+    font-size: 28px;
+    width: 97.5%;
+    height: 200px;
+    background: none;
+    border: 1px solid rgb(0, 0, 0, 0.3);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 24px;
+}
+
+.menu__save {
+    background: var(--input-primary);
+    border-radius: 6px;
+    width: 100%;
+    font-size: 32px;
+    padding: 16px;
+    color: white;
+    cursor: pointer;
 }
