@@ -22,3 +22,5 @@ Route::post('/login', [\App\Http\Controllers\UserController::class, 'login']);
 Route::post('/register', [\App\Http\Controllers\UserController::class, 'register']);
 
 Route::post('/store', [\App\Http\Controllers\NoteController::class, 'store']);
+Route::get('/delete', [\App\Http\Controllers\NoteController::class, 'delete']);
+Route::post('/edit',[\App\Http\Controllers\NoteController::class, 'edit']);
