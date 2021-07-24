@@ -19,7 +19,7 @@ class NoteController extends Controller
         ]);
 
         //Провал валидатора
-        if ($titleValidator->failed()) {
+        if ($titleValidator->fails()) {
             return response()->json([
                 'data' => [
                     'error' => 'Необходимо ввести заголовок'
@@ -57,7 +57,7 @@ class NoteController extends Controller
         ]);
 
         //Провал валидатора
-        if ($titleValidator->failed()) {
+        if ($titleValidator->fails()) {
             return response()->json([
                 'data' => [
                     'error' => 'Необходимо ввести заголовок'

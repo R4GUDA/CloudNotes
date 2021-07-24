@@ -1,0 +1,9 @@
+.notes {
+    width: 100%;
+}
+
+.notes__inner {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+}

@@ -12,7 +12,7 @@
 
 <body>
     <header class="header">
-        <div class="container">
+        <div class="container-header">
             <div class="header__inner">
                 <a href="#" class="header__logo">cloudnotes</a>
                 <input type="submit" value="log out" class="header__log-out">
@@ -20,21 +20,37 @@
         </div>
     </header>
 
-    <!-- menu -->
-    <section class="menu">
-        <div class="container">
-            <div class="menu__inner">
-                <div class="menu__top">
-                    <input placeholder="Title" class="menu__title">
-                    <a class="menu__more">
-                        <div class="menu__more-dot"></div>
-                    </a>
-                </div>
-                <textarea placeholder="Content" class="menu__textarea" name="" id="" cols="1" rows="1"></textarea>
-                <input class="menu__save" value="Save" type="submit">
+    <div class="content">
+
+        <!-- menu -->
+        <section class="menu">
+            <div class="menu__group">
+                <a href="#" class="group">Personal</a>
+                <a href="#" class="group">Job</a>
+                <input class="group__add" type="button" value="">
             </div>
+        </section>
+
+        <!-- notes -->
+        <section class="notes">
+
+            <!-- notes search -->
+            <div class="notes__search">
+                <input type="text">
+            </div>
+
+            <!-- notes cards -->
+            <div class="notes__inner">
+                <div class="note">
+                    <div class="note__top">
+                        <input class="note__title" value="Title" placeholder="title" type="text" name="" id="">
+                        <button class="note__close"><img alt="cross" src="./assets/imgs/sections/note__close.png" class="note__close-img"></button>
+                    </div>
+                    <textarea placeholder="Content" class="note__content" name="" id="" cols="30" rows="10"></textarea>
+                </div>
+        </section>
         </div>
-    </section>
+
 </body>
 
 </html>

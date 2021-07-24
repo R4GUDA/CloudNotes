@@ -9,8 +9,8 @@
 
 @import url(./sections/menu.css);
 @import url(./sections/header.css);
-@import url(./sections/cards.css);
+@import url(./sections/notes.css);
 
 /* components */
 
-@import url(./component/card.css);
+@import url(./component/note.css);
