@@ -13,16 +13,17 @@ class UserController extends Controller
 
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [
-            'login' => 'required|max:255',
-            'email' => 'required',
+            'login' => 'required|unique:users|max:255',
+            'email' => 'required|unique:users',
             'password' => 'required'
         ]);
 
         // Проверка всех введенных данных
         if($validator->fails()) {
             return response()->json([
-                'data' => [
-                    'error'=> 'Неверно введены данные'
+                'error' => [
+                    'message'=> 'Неверно введены данные',
+                    'errors' => $validator->errors()
                 ]
             ],422);
         }
@@ -30,8 +31,8 @@ class UserController extends Controller
         // Проверка на занятость логина или пароля
         if (User::where('login', $request->login)->OrWhere('email', $request->email)->first()) {
             return response()->json([
-                'data' => [
-                    'error' => 'Введеный логин или Email уже заняты'
+                'error' => [
+                    'message' => 'Введеный логин или Email уже заняты'
                 ]
             ], 422);
         }
@@ -57,8 +58,8 @@ class UserController extends Controller
         //Проверка на имя пользователя
         if(!User::where('login', $request->login)->first()) {
             return response()->json([
-                'data' => [
-                    'error' => 'Пользователь не найден'
+                'error' => [
+                    'message' => 'Пользователь не найден'
                 ]
             ],421);
         }
@@ -66,8 +67,8 @@ class UserController extends Controller
         // Проверка на правильность пароля
         if(!User::where('login', $request->login)->where('password',$request->password)->first()) {
             return response()->json([
-                'data' => [
-                    'error' => 'Пароль неверный'
+                'error' => [
+                    'message' => 'Пароль неверный'
                 ]
             ],421);
         }

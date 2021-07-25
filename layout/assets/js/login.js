@@ -4,11 +4,23 @@ $('#login-btn').on('click', () => {
             login: String($('.login__login-input').val()),
             password: String($('.login__password-input').val())
         })
-        .catch(function(error) {
-            console.log(error)
-        })
         .then(function(response) {
             document.cookie = `token=${response.data.data.token}`
+        })
+        .catch(function(error) {
+            if (error.response.data.error.errors.password == "The password field is required.") {
+                $('.login__password-input').addClass('auth-input_denied')
+                setTimeout(() => {
+                    $('.login__password-input').removeClass('auth-input_denied')
+                }, 300)
+            }
+
+            if (error.response.data.error.errors.login == "The login field is required.") {
+                $('.login__login-input').addClass('auth-input_denied')
+                setTimeout(() => {
+                    $('.login__login-input').removeClass('auth-input_denied')
+                }, 300)
+            }
         })
 })
 
@@ -31,11 +43,29 @@ $('.login__register').on('click', function() {
                 email: String($('.login__email-input').val()),
                 password: String($('.login__password-input').val())
             })
-            .catch(function(error) {
-                console.log(error)
-            })
             .then(function(response) {
                 location.reload()
+            })
+            .catch(function(error) {
+                console.log(error.response.data.error.errors)
+                if (error.response.data.error.errors.login == "The login field is required.") {
+                    $('.login__login-input').addClass('auth-input_denied')
+                    setTimeout(() => {
+                        $('.login__login-input').removeClass('auth-input_denied')
+                    }, 300)
+                }
+                if (error.response.data.error.errors.email == "The email field is required.") {
+                    $('.login__email-input').addClass('auth-input_denied')
+                    setTimeout(() => {
+                        $('.login__email-input').removeClass('auth-input_denied')
+                    }, 300)
+                }
+                if (error.response.data.error.errors.password == "The password field is required.") {
+                    $('.login__password-input').addClass('auth-input_denied')
+                    setTimeout(() => {
+                        $('.login__password-input').removeClass('auth-input_denied')
+                    }, 300)
+                }
             })
     })
 })

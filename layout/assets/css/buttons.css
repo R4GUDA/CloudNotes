@@ -15,6 +15,10 @@
     border-color: var(--input-primary);
 }
 
+.auth-input_denied {
+    border-color: rgb(250, 68, 68)
+}
+
 .auth-btn {
     width: 335px;
     padding: 12px 12px 12px 16px;
