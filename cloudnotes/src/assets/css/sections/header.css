@@ -1,0 +1,26 @@
+.header {
+    display: fixed;
+    width: 100%;
+    background: var(--color-bg);
+    margin-bottom: 64px;
+}
+
+.header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+}
+
+.header__logo {
+    color: white;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 32px;
+}
+
+.header__log-out {
+    cursor: pointer;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 24px;
+    color: white;
+}

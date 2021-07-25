@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class NoteController extends Controller
 {
+
     public function store(Request $request) {
         //Получение id из токена
         $userId = User::where('token', $request->token)->first()->id;

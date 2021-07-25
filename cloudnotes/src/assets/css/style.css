@@ -1,0 +1,16 @@
+/* general */
+
+@import url(./reset.css);
+@import url(./buttons.css);
+@import url(./vars.css);
+@import url(./general.css);
+
+/* sections */
+
+@import url(./sections/menu.css);
+@import url(./sections/header.css);
+@import url(./sections/notes.css);
+
+/* components */
+
+@import url(./component/note.css);

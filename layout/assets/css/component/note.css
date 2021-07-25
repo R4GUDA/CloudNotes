@@ -1,13 +1,13 @@
 .note {
     padding: 16px 32px 16px 32px;
-    width: 700px;
+    width: 30vw;
     margin-bottom: 32px;
     border-radius: 6px;
     background: var(--color-bg);
 }
 
 .note:nth-child(even) {
-    margin-right: 200px;
+    /* margin-right: 100px; */
 }
 
 .note__top {
@@ -20,6 +20,7 @@
     font-size: 48px;
     font-weight: bold;
     margin-bottom: 16px;
+    width: 80%;
     color: white;
 }
 

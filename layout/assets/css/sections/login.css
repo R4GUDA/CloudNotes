@@ -36,3 +36,7 @@
     font-size: 48px;
     color: white;
 }
+
+.login__submit {
+    margin-bottom: 16px;
+}

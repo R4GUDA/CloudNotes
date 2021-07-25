@@ -1,0 +1,24 @@
+.menu {
+    padding-left: 24px;
+    width: 20%;
+    height: 900px;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu__group {
+    display: flex;
+    flex-direction: column;
+}
+
+.group {
+    display: inline-block;
+    padding: 10px;
+    font-size: 24px;
+    color: grey;
+    transition: ease 0.3s;
+}
+
+.group:hover {
+    color: var(--input-primary);
+}

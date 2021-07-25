@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./assets/js/jquery/jquery-3.6.0.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./assets/js/login.js" defer></script>
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/sections/login.css">
     <link rel="stylesheet" href="./assets/css/buttons.css">
@@ -24,8 +27,9 @@
             <hr class="login__hr">
             <div class="login__right">
                 <input class="login__login-input auth-input" placeholder="Login" type="text" name="" id="">
-                <input class="login__password-input auth-input" placeholder="Password" type="text">
-                <input class="login__submit auth-btn" value="Sign in" type="submit">
+                <input class="login__password-input auth-input" placeholder="Password" type="password">
+                <input id="login-btn" class="login__submit auth-btn" value="Sign in" type="button">
+                <input class="login__register auth-btn auth-btn_sign-up" value="Sign up" type="button">
             </div>
         </div>
     </section>

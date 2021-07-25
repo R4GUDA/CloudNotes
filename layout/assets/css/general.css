@@ -9,10 +9,15 @@ body {
 }
 
 .container-header {
-    width: 1920px;
+    width: 1400px;
     margin: 0 auto;
 }
 
 .content {
     display: flex;
+}
+
+.notes-container {
+    margin: 0 auto;
+    width: 75vw;
 }

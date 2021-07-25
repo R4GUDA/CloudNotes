@@ -1,0 +1,28 @@
+.auth-input {
+    background: none;
+    width: 100%;
+    border: 3px solid var(--input-non-selected);
+    border-radius: 6px;
+    padding: 12px 12px 12px 16px;
+    font-size: 24px;
+    color: white;
+    outline: none;
+    margin-bottom: 32px;
+    transition: ease 0.3s;
+}
+
+.auth-input:focus {
+    border-color: var(--input-primary);
+}
+
+.auth-btn {
+    width: 335px;
+    padding: 12px 12px 12px 16px;
+    font-size: 24px;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    background: var(--input-primary);
+}

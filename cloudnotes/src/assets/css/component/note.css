@@ -1,0 +1,41 @@
+.note {
+    padding: 16px 32px 16px 32px;
+    width: 700px;
+    margin-bottom: 32px;
+    border-radius: 6px;
+    background: var(--color-bg);
+}
+
+.note:nth-child(even) {
+    margin-right: 100px;
+}
+
+.note__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.note__title {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: white;
+}
+
+.note__content {
+    font-size: 28px;
+    color: white;
+    width: 100%;
+    background: none;
+}
+
+.note__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.note__close-img {
+    height: 30px;
+}

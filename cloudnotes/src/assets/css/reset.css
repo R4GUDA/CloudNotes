@@ -1,0 +1,22 @@
+* {
+    outline: none;
+}
+
+body {
+    margin: 0 0;
+}
+
+input {
+    background: none;
+    border: none;
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+textarea {
+    resize: none;
+    border: none;
+}

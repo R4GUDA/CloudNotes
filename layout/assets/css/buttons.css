@@ -26,3 +26,8 @@
     color: white;
     background: var(--input-primary);
 }
+
+.auth-btn_sign-up {
+    background: rgb(197, 197, 197);
+    color: rgb(65, 65, 65);
+}

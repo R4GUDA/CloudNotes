@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 class UserController extends Controller
 {
 
+
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [
             'login' => 'required|max:255',
@@ -23,7 +24,7 @@ class UserController extends Controller
                 'data' => [
                     'error'=> 'Неверно введены данные'
                 ]
-            ],401);
+            ],422);
         }
 
         // Проверка на занятость логина или пароля
@@ -32,7 +33,7 @@ class UserController extends Controller
                 'data' => [
                     'error' => 'Введеный логин или Email уже заняты'
                 ]
-            ], 401);
+            ], 422);
         }
         User::create($request->all());
     }
@@ -46,10 +47,11 @@ class UserController extends Controller
         // Проверка на корректность введения данных
         if($validator->fails()) {
             return response()->json([
-                'data' => [
-                    'error'=> 'Неверно введены данные'
+                'error' => [
+                    'message'=> 'Неверно введены данные',
+                    'errors' => $validator->errors()
                 ]
-            ],401);
+            ],421);
         }
 
         //Проверка на имя пользователя
@@ -58,7 +60,7 @@ class UserController extends Controller
                 'data' => [
                     'error' => 'Пользователь не найден'
                 ]
-            ],401);
+            ],421);
         }
 
         // Проверка на правильность пароля
@@ -67,15 +69,15 @@ class UserController extends Controller
                 'data' => [
                     'error' => 'Пароль неверный'
                 ]
-            ],401);
+            ],421);
         }
-
         //Генерация токена, отправка клиенту и сохранение
         $token = Str::random(16);
 
         $user = User::where('login', $request->login)->first();
         $user->token = $token;
         $user->save();
+
         return response()->json([
             'data' => [
                 'token' => $token
