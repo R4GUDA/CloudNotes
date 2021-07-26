@@ -23,4 +23,4 @@ Route::post('/register', [\App\Http\Controllers\UserController::class, 'register
 
 Route::post('/store', [\App\Http\Controllers\NoteController::class, 'store'])->middleware([\App\Http\Middleware\TokenComparisonMiddleware::class]);
 Route::post('/delete', [\App\Http\Controllers\NoteController::class, 'delete'])->middleware([\App\Http\Middleware\TokenComparisonMiddleware::class]);
-Route::post('/edit',[\App\Http\Controllers\NoteController::class, 'edit']);
+Route::post('/edit',[\App\Http\Controllers\NoteController::class, 'edit'])->middleware([\App\Http\Middleware\TokenComparisonMiddleware::class]);

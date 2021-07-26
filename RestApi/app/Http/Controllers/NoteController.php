@@ -44,8 +44,29 @@ class NoteController extends Controller
                     'errors' => $deleteValidation->errors()
                 ]
             ],422);
-        
 
         Note::find($request->id)->delete();
+    }
+
+    public function edit(Request $request) {
+        $editValidation = Validator::make($request->all(),[
+            'title' => 'required',
+            'text' => 'required',
+            'id' => 'required'
+        ]);
+
+        if($editValidation->fails())
+            return response()->json([
+                'errors' => [
+                    'error' => $editValidation->errors()
+                ]
+            ],422);
+
+        $note = Note::find($request->id);
+
+        $note->theme = $request->title;
+        $note->text = $request->text;
+
+        $note->save;
     }
 }
