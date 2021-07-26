@@ -1,5 +1,11 @@
+import { card_rendering, get_cookie } from "./modules.js"
 // on load
-// axios.post('/')
+axios.get('http://127.0.0.1:8000/api/get', {
+        headers: { 'token': get_cookie('token') }
+    })
+    .then(function(response) {
+        card_rendering(response.data)
+    })
 
 // log-out
 $('#header__log-out').on('click', () => {
