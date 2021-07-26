@@ -6,8 +6,11 @@ $('#login-btn').on('click', () => {
         })
         .then(function(response) {
             document.cookie = `token=${response.data.data.token}`
+            window.location.replace("http://127.0.0.1:5500/index.html");
         })
         .catch(function(error) {
+
+            // display validation errors
             if (error.response.data.error.errors.password == "The password field is required.") {
                 $('.login__password-input').addClass('auth-input_denied')
                 setTimeout(() => {
@@ -47,7 +50,8 @@ $('.login__register').on('click', function() {
                 location.reload()
             })
             .catch(function(error) {
-                console.log(error.response.data.error.errors)
+
+                // display validation errors
                 if (error.response.data.error.errors.login == "The login field is required.") {
                     $('.login__login-input').addClass('auth-input_denied')
                     setTimeout(() => {
