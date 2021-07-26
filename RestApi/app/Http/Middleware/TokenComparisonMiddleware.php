@@ -18,6 +18,7 @@ class TokenComparisonMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+
         if(!User::where('token', $request->token)->first())
             return response()->json([
                 'errors' => [

@@ -14,4 +14,9 @@ class Note extends Model
         'title',
         'text'
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
 }

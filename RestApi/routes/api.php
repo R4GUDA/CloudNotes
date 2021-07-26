@@ -22,5 +22,6 @@ Route::post('/login', [\App\Http\Controllers\UserController::class, 'login']);
 Route::post('/register', [\App\Http\Controllers\UserController::class, 'register']);
 
 Route::post('/store', [\App\Http\Controllers\NoteController::class, 'store'])->middleware([\App\Http\Middleware\TokenComparisonMiddleware::class]);
-Route::post('/delete', [\App\Http\Controllers\NoteController::class, 'delete'])->middleware([\App\Http\Middleware\TokenComparisonMiddleware::class]);
-Route::post('/edit',[\App\Http\Controllers\NoteController::class, 'edit'])->middleware([\App\Http\Middleware\TokenComparisonMiddleware::class]);
+Route::delete('/delete', [\App\Http\Controllers\NoteController::class, 'delete'])->middleware([\App\Http\Middleware\TokenComparisonMiddleware::class]);
+Route::put('/edit',[\App\Http\Controllers\NoteController::class, 'edit'])->middleware([\App\Http\Middleware\TokenComparisonMiddleware::class]);
+Route::get('/get',[\App\Http\Controllers\NoteController::class, 'get'])->middleware([\App\Http\Middleware\TokenComparisonMiddleware::class]);

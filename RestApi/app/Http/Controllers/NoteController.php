@@ -64,9 +64,13 @@ class NoteController extends Controller
 
         $note = Note::find($request->id);
 
-        $note->theme = $request->title;
+        $note->title = $request->title;
         $note->text = $request->text;
 
-        $note->save;
+        $note->save();
+    }
+
+    public function get(Request $request) {
+        return Note::where('user_id', Auth::id())->get();
     }
 }
