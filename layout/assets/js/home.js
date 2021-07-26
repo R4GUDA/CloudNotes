@@ -1,10 +1,11 @@
-import { card_rendering, get_cookie } from "./modules.js"
+import { card_rendering, get_cookie, add_delete_card } from "./modules.js"
 // on load
 axios.get('http://127.0.0.1:8000/api/get', {
         headers: { 'token': get_cookie('token') }
     })
     .then(function(response) {
         card_rendering(response.data)
+        add_delete_card(response.data)
     })
 
 // log-out
