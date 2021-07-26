@@ -11,12 +11,6 @@ class NoteController extends Controller
 {
 
     public function store(Request $request) {
-        if($request->token != User::where('token', $request->token)->firstOrFail()->token)
-            return response()->json([
-                'errors' => [
-                    'error' => 'Unauthorized',
-                ]
-            ],401);
 
         $noteValidation = Validator::make($request->all(),[
             'token' => 'required',
@@ -37,5 +31,8 @@ class NoteController extends Controller
             'title' => $request->title,
             'text' => $request->text
         ]);
+    }
+
+    public function delete(Request $request) {
     }
 }

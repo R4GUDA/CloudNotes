@@ -21,6 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/login', [\App\Http\Controllers\UserController::class, 'login']);
 Route::post('/register', [\App\Http\Controllers\UserController::class, 'register']);
 
-Route::post('/store', [\App\Http\Controllers\NoteController::class, 'store']);
-Route::get('/delete', [\App\Http\Controllers\NoteController::class, 'delete']);
+Route::post('/store', [\App\Http\Controllers\NoteController::class, 'store'])->middleware([\App\Http\Middleware\TokenComparisonMiddleware::class]);
+Route::get('/delete', [\App\Http\Controllers\NoteController::class, 'delete'])->middleware([\App\Http\Middleware\TokenComparisonMiddleware::class]);
 Route::post('/edit',[\App\Http\Controllers\NoteController::class, 'edit']);
