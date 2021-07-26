@@ -11,65 +11,31 @@ class NoteController extends Controller
 {
 
     public function store(Request $request) {
-        //Получение id из токена
-        $userId = User::where('token', $request->token)->first()->id;
+        if($request->token != User::where('token', $request->token)->firstOrFail()->token)
+            return response()->json([
+                'errors' => [
+                    'error' => 'Unauthorized',
+                ]
+            ],401);
 
-        //Валидатор заголовка
-        $titleValidator = Validator::make($request->all(),[
+        $noteValidation = Validator::make($request->all(),[
+            'token' => 'required',
+            'theme' => 'required',
             'title' => 'required'
         ]);
 
-        //Провал валидатора
-        if ($titleValidator->fails()) {
+        if($noteValidation->fails())
             return response()->json([
-                'data' => [
-                    'error' => 'Необходимо ввести заголовок'
+                'errors' => [
+                    'error' => $noteValidation->errors()
                 ]
-            ],401);
-        }
+            ],422);
 
-        //Создание записи
         Note::create([
-            'user_id' => $userId,
+            'user_id' => User::where('token', $request->token)->first()->id,
+            'theme' => $request->theme,
             'title' => $request->title,
-            'text' => $request->text,
-            'color_id' => $request->color_id
-        ]);
-    }
-
-    public function delete(Request $request) {
-        $userId = User::where('token', $request->token)->first()->id;
-        if (Note::where('user_id', $userId)->first()) {
-            Note::find($request->id)->delete();
-        }
-        else return response()->json([
-            'data' => [
-                'error' => 'Действие запрещено'
-            ]
-        ],403);
-    }
-
-    public function edit(Request $request) {
-        $userId = User::where('token', $request->token)->first()->id;
-
-        //Валидатор заголовка
-        $titleValidator = Validator::make($request->all(),[
-            'title' => 'required'
-        ]);
-
-        //Провал валидатора
-        if ($titleValidator->fails()) {
-            return response()->json([
-                'data' => [
-                    'error' => 'Необходимо ввести заголовок'
-                ]
-            ],401);
-        }
-
-        Note::where('user_id', $userId)->update([
-            'title' => $request->title,
-            'text' => $request->text,
-            'color_id' => $request->color_id
+            'text' => $request->text
         ]);
     }
 }

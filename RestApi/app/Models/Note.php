@@ -10,8 +10,8 @@ class Note extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
+        'theme',
         'title',
-        'text',
-        'color_id'
+        'text'
     ];
 }
