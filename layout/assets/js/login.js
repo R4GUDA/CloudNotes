@@ -32,8 +32,8 @@ $('.login__register').on('click', function() {
     $('.login__right').remove()
     $(`
     <div class="login__right">
-    <input class="login__login-input auth-input" placeholder="Login" type="text" name="" id="">
-    <input class="login__email-input auth-input" placeholder="Email" type="text" name="" id="">
+    <input class="login__login-input auth-input" placeholder="Login" type="text">
+    <input class="login__email-input auth-input" placeholder="Email" type="text">
     <input class="login__password-input auth-input" placeholder="Password" type="password">
     <input id="register-btn" class="login__register auth-btn auth-btn_sign-up" value="Sign up" type="button">
     </div>

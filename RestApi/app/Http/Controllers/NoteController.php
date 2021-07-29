@@ -48,7 +48,7 @@ class NoteController extends Controller
         Note::find($request->id)->delete();
     }
 
-    public function edit(Request $request) {
+    public function put(Request $request) {
         $editValidation = Validator::make($request->all(),[
             'title' => 'required',
             'text' => 'required',

@@ -11,25 +11,63 @@ export function get_cookie(cookie_name) {
 // card rendering
 export function card_rendering(data) {
     data.forEach(element => {
-        $('.notes__inner').append(`
+        $('.notes__cards').append(`
             <form action="" class="note" >
                 <div class="note__top">
-                    <input class="note__title" value="${element.title}" placeholder="Title" type="text" name="">
-                    <button type="button" id=${element.id} class="note__close"><img alt="cross" src="./assets/imgs/sections/note__close.png" class="note__close-img"></button>
+                    <input class="note__title" data-id=${element.id} value="${element.title}" placeholder="Title" type="text" name="">
+                    <button type="button" data-id=${element.id} class="note__close"><img alt="cross" src="./assets/imgs/sections/note__close.png" class="note__close-img"></button>
                 </div>
-                <textarea placeholder="Content" class="note__content" name="" cols="30" rows="10">${element.text}</textarea>
+                <textarea placeholder="Content" data-id=${element.id} class="note__content" name="" cols="30" rows="10">${element.text}</textarea>
             <form>
         `)
     })
 
 }
 
-// add delete on cards
-export function add_delete_card(data) {
+// delete on cards
+export function delete_card(data) {
     $('.note__close').on('click', function() {
-        axios.delete('http://127.0.0.1:8000/api/delete', {
-            headers: { 'token': get_cookie('token') },
-            data: { 'id': String(this.getAttribute('id')) }
+        axios('http://127.0.0.1:8000/api/delete', {
+            method: "delete",
+            headers: { 'Authorization': get_cookie('token') },
+            data: { 'id': this.getAttribute('data-id') }
         })
     })
+}
+
+// update card
+export function update_card() {
+    $('.note__title').on('input keyup', function() {
+        update_func(this)
+    })
+    $('.note__content').on('input keyup', function() {
+        update_func(this)
+    })
+}
+
+// delay setTimeout
+let delay = (function() {
+    let timer = 0;
+    return function(callback, ms) {
+        clearTimeout(timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
+
+// collect and send data
+export function update_func(obj) {
+    let id = obj.getAttribute('data-id')
+    let title = $(`.note__title[data-id=${id}]`).val()
+    let text = $(`.note__content[data-id=${id}]`).val()
+    delay(function() {
+        axios('http://127.0.0.1:8000/api/put', {
+            method: "put",
+            headers: { 'Authorization': get_cookie('token') },
+            data: {
+                'title': String(title),
+                'text': String(text),
+                'id': id
+            }
+        })
+    }, 500)
 }

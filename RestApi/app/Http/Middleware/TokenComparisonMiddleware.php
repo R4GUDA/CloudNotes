@@ -18,13 +18,13 @@ class TokenComparisonMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!User::where('token', $request->header('token'))->first())
+        if(!User::where('token', $request->header('Authorization'))->first())
             return response()->json([
                 'errors' => [
                     'error' => 'Unauthorized',
                 ]
             ],401);
-        Auth::login(User::where('token', $request->header('token'))->first());
+        Auth::login(User::where('token', $request->header('Authorization'))->first());
         return $next($request);
     }
 }

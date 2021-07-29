@@ -1,7 +1,36 @@
 .notes {}
 
-.notes__inner {
+.notes__options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.notes__inner {}
+
+.notes__search {
+    margin-left: 8px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.notes__add-note {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    margin-left: 12px;
+}
+
+.notes__cards {
     flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
+}
+
+.notes__search-field {
+    border-bottom: 2px solid var(--input-non-selected);
+    font-size: 28px;
+    padding: 12px 12px 8px 16px;
 }
