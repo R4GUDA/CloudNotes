@@ -1,4 +1,4 @@
-import { card_rendering, get_cookie, delete_card, update_card } from "./modules.js"
+import { card_rendering, get_cookie, delete_card, update_card, clear_cards } from "./modules.js"
 // on load
 axios('http://127.0.0.1:8000/api/get', {
         method: "get",
@@ -9,7 +9,6 @@ axios('http://127.0.0.1:8000/api/get', {
         delete_card(response.data)
         update_card()
     })
-    .catch(function(error) {})
 
 
 // log-out
@@ -24,5 +23,13 @@ $('.notes__add-note').on('click', () => {
 
 // search note
 $('.notes__search').on('click', () => {
-    //todo
+    axios('http://127.0.0.1:8000/api/search', {
+            method: 'post',
+            headers: { 'Authorization': get_cookie('token') },
+            data: { 'key_word': $('.notes__search-field').val() }
+        })
+        .then(function(response) {
+            clear_cards()
+            card_rendering(response.data)
+        })
 })

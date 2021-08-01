@@ -59,15 +59,25 @@ export function update_func(obj) {
     let id = obj.getAttribute('data-id')
     let title = $(`.note__title[data-id=${id}]`).val()
     let text = $(`.note__content[data-id=${id}]`).val()
+    console.log(text)
     delay(function() {
         axios('http://127.0.0.1:8000/api/put', {
-            method: "put",
-            headers: { 'Authorization': get_cookie('token') },
-            data: {
-                'title': String(title),
-                'text': String(text),
-                'id': id
-            }
-        })
+                method: "put",
+                headers: { 'Authorization': get_cookie('token') },
+                data: {
+                    'title': String(title),
+                    'text': String(text),
+                    'id': id
+                }
+            })
+            .then(function(response) {
+                console.log(response)
+            })
     }, 500)
+}
+
+// clear cards
+
+export function clear_cards() {
+    $('.notes__cards').empty()
 }

@@ -12,15 +12,15 @@ class NoteController extends Controller
 {
 
     public function store(Request $request) {
-        $storeValidation = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(),[
             'theme' => 'required',
             'title' => 'required'
         ]);
 
-        if($storeValidation->fails())
+        if($validator->fails())
             return response()->json([
                 'errors' => [
-                    'error' => $storeValidation->errors()
+                    'error' => $validator->errors()
                 ]
             ],422);
 
@@ -34,14 +34,14 @@ class NoteController extends Controller
 
     public function delete(Request $request) {
 
-        $deleteValidation = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'id' => 'required'
         ]);
 
-        if ($deleteValidation->fails())
+        if ($validator->fails())
             return response()->json([
                 'error' => [
-                    'errors' => $deleteValidation->errors()
+                    'errors' => $validator->errors()
                 ]
             ],422);
 
@@ -49,16 +49,15 @@ class NoteController extends Controller
     }
 
     public function put(Request $request) {
-        $editValidation = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(),[
             'title' => 'required',
-            'text' => 'required',
             'id' => 'required'
         ]);
 
-        if($editValidation->fails())
+        if($validator->fails())
             return response()->json([
                 'errors' => [
-                    'error' => $editValidation->errors()
+                    'error' => $validator->errors()
                 ]
             ],422);
 
@@ -72,5 +71,12 @@ class NoteController extends Controller
 
     public function get(Request $request) {
         return Note::where('user_id', Auth::id())->get();
+    }
+
+    public function search(Request $request) {
+        $searchByTitle = Note::where('title','LIKE',"%" . $request->key_word . "%")->where('user_id', Auth::id())->get();
+        $searchByText = Note::where('text','LIKE',"%" . $request->key_word . "%")->where('user_id', Auth::id())->get();
+        $search = $searchByTitle->merge($searchByText);
+        return response()->json($search);
     }
 }

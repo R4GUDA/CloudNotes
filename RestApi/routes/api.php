@@ -25,3 +25,4 @@ Route::post('/store', [\App\Http\Controllers\NoteController::class, 'store'])->m
 Route::delete('/delete', [\App\Http\Controllers\NoteController::class, 'delete'])->middleware([\App\Http\Middleware\TokenComparisonMiddleware::class]);
 Route::put('/put',[\App\Http\Controllers\NoteController::class, 'put'])->middleware([\App\Http\Middleware\TokenComparisonMiddleware::class]);
 Route::get('/get',[\App\Http\Controllers\NoteController::class, 'get'])->middleware([\App\Http\Middleware\TokenComparisonMiddleware::class]);
+Route::post('/search',[\App\Http\Controllers\NoteController::class, 'search'])->middleware(\App\Http\Middleware\TokenComparisonMiddleware::class);
