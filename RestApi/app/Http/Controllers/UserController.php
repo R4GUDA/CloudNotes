@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Note;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -9,7 +10,6 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
-
 
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [
@@ -84,5 +84,13 @@ class UserController extends Controller
                 'token' => $token
             ]
         ]);
+    }
+
+    // check token for redirect
+    public function checkToken(Request $request){
+        if(User::where('token', $request->header('Authorization'))->first()) {
+            return response()->json([]);
+        }
+        else return response()->json([],403);
     }
 }

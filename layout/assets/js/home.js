@@ -1,5 +1,16 @@
 import { card_rendering, get_cookie, delete_card, update_card, clear_cards, store_card } from "./modules.js"
 // on load
+
+// redirect without token
+axios('http://127.0.0.1:8000/api/checkToken', {
+        method: 'post',
+        headers: { 'Authorization': get_cookie('token') },
+        data: {}
+    })
+    .catch(function(error) {
+        if (error.response.status == 403) window.location.replace("/login.html")
+    })
+
 axios('http://127.0.0.1:8000/api/get', {
         method: "get",
         headers: { 'Authorization': get_cookie('token') }
@@ -14,6 +25,7 @@ axios('http://127.0.0.1:8000/api/get', {
 // log-out
 $('#header__log-out').on('click', () => {
     document.cookie = "token=1; expires=Thu, 01 Jan 1970 00:00:00 GMT;"
+    window.location.replace("/login.html")
 })
 
 // add note

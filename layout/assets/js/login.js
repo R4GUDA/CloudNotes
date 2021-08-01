@@ -1,3 +1,15 @@
+import { get_cookie } from "./modules.js"
+
+// redirect with token
+axios('http://127.0.0.1:8000/api/checkToken', {
+        method: 'post',
+        headers: { 'Authorization': get_cookie('token') },
+        data: {}
+    })
+    .then(function(response) {
+        window.location.replace("/index.html")
+    })
+
 // Login
 $('#login-btn').on('click', () => {
     axios.post('http://127.0.0.1:8000/api/login', {
@@ -6,7 +18,7 @@ $('#login-btn').on('click', () => {
         })
         .then(function(response) {
             document.cookie = `token=${response.data.data.token}`
-            window.location.replace("http://127.0.0.1:5500/index.html");
+            window.location.replace("/index.html");
         })
         .catch(function(error) {
 
