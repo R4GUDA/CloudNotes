@@ -27,8 +27,8 @@ class NoteController extends Controller
         $note = new Note([
             'user_id' => Auth::id(),
             'theme' => $request->theme,
-            'title' => $request->title,
-            'text' => $request->text
+            'title' => "",
+            'text' => ""
         ]);
         $note->save();
         return response()->json([$note->id]);
@@ -66,7 +66,8 @@ class NoteController extends Controller
         $note = Note::find($request->id);
 
         $note->title = $request->title;
-        $note->text = $request->text;
+        if($request->text == "") $note->text = "";
+        else $note->text = $request->text;
 
         $note->save();
     }

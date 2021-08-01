@@ -32,6 +32,7 @@ export function delete_card(data) {
             headers: { 'Authorization': get_cookie('token') },
             data: { 'id': this.getAttribute('data-id') }
         })
+        $(this).closest('form').remove()
     })
 }
 
