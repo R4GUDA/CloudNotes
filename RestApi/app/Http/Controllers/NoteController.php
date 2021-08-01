@@ -13,8 +13,7 @@ class NoteController extends Controller
 
     public function store(Request $request) {
         $validator = Validator::make($request->all(),[
-            'theme' => 'required',
-            'title' => 'required'
+            'theme' => 'required'
         ]);
 
         if($validator->fails())
@@ -24,12 +23,15 @@ class NoteController extends Controller
                 ]
             ],422);
 
-        Note::create([
+
+        $note = new Note([
             'user_id' => Auth::id(),
             'theme' => $request->theme,
             'title' => $request->title,
             'text' => $request->text
         ]);
+        $note->save();
+        return response()->json([$note->id]);
     }
 
     public function delete(Request $request) {

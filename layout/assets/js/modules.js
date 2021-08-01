@@ -59,20 +59,16 @@ export function update_func(obj) {
     let id = obj.getAttribute('data-id')
     let title = $(`.note__title[data-id=${id}]`).val()
     let text = $(`.note__content[data-id=${id}]`).val()
-    console.log(text)
     delay(function() {
         axios('http://127.0.0.1:8000/api/put', {
-                method: "put",
-                headers: { 'Authorization': get_cookie('token') },
-                data: {
-                    'title': String(title),
-                    'text': String(text),
-                    'id': id
-                }
-            })
-            .then(function(response) {
-                console.log(response)
-            })
+            method: "put",
+            headers: { 'Authorization': get_cookie('token') },
+            data: {
+                'title': String(title),
+                'text': String(text),
+                'id': id
+            }
+        })
     }, 500)
 }
 
@@ -80,4 +76,24 @@ export function update_func(obj) {
 
 export function clear_cards() {
     $('.notes__cards').empty()
+}
+
+// store empty card
+export function store_card() {
+    axios('http://127.0.0.1:8000/api/store', {
+            headers: { Authorization: get_cookie('token') },
+            method: 'post',
+            data: {
+                'theme': 'default',
+                'title': $('.note__title[data-id="new_note"]').val(),
+                'text': $('.note__text[data-id="new_note]').val()
+            }
+        })
+        .then(function(response) {
+            $('.note__title[data-id="new_note"]').attr('data-id', response.data[0])
+            $('.note__close[data-id="new_note"]').attr('data-id', response.data[0])
+            $('.note__content[data-id="new_note"]').attr('data-id', response.data[0])
+            delete_card(response.data)
+            update_card()
+        })
 }

@@ -1,4 +1,4 @@
-import { card_rendering, get_cookie, delete_card, update_card, clear_cards } from "./modules.js"
+import { card_rendering, get_cookie, delete_card, update_card, clear_cards, store_card } from "./modules.js"
 // on load
 axios('http://127.0.0.1:8000/api/get', {
         method: "get",
@@ -18,7 +18,16 @@ $('#header__log-out').on('click', () => {
 
 // add note
 $('.notes__add-note').on('click', () => {
-    //todo
+    $('.notes__cards').append(`
+    <form action="" class="note" >
+        <div class="note__top">
+            <input class="note__title" data-id="new_note" value="" placeholder="Title" type="text" name="">
+            <button type="button" data-id="new_note" class="note__close"><img alt="cross" src="./assets/imgs/sections/note__close.png" class="note__close-img"></button>
+        </div>
+        <textarea placeholder="Content" data-id="new_note" class="note__content" name="" cols="30" rows="10"></textarea>
+    <form>
+    `)
+    store_card()
 })
 
 // search note
