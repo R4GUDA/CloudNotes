@@ -20,6 +20,15 @@
     flex-direction: column;
 }
 
+.login__error {
+    height: 28px;
+    font-size: 18px;
+    padding: 2px;
+    color: #AF9778;
+    display: flex;
+    align-items: center;
+}
+
 .login__hr {
     background: rgb(182, 178, 178, 0.2);
     border: none;

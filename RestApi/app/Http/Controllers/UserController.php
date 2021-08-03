@@ -22,20 +22,23 @@ class UserController extends Controller
         if($validator->fails()) {
             return response()->json([
                 'error' => [
-                    'message'=> 'Неверно введены данные',
+                    'code' => 422,
+                    'message'=> 'Validation error',
                     'errors' => $validator->errors()
                 ]
             ],422);
         }
 
-        // Проверка на занятость логина или пароля
-        if (User::where('login', $request->login)->OrWhere('email', $request->email)->first()) {
-            return response()->json([
-                'error' => [
-                    'message' => 'Введеный логин или Email уже заняты'
-                ]
-            ], 422);
-        }
+//        // Проверка на занятость логина или email
+//        if (User::where('login', $request->login)->OrWhere('email', $request->email)->first()) {
+//            return response()->json([
+//                'error' => [
+//                    'code' => 422,
+//
+//                    'message' => 'Login or Email is already use'
+//                ]
+//            ], 422);
+//        }
         User::create($request->all());
     }
 
@@ -49,28 +52,33 @@ class UserController extends Controller
         if($validator->fails()) {
             return response()->json([
                 'error' => [
-                    'message'=> 'Неверно введены данные',
+                    'code' => 422,
+                    'message'=> 'Validation error',
                     'errors' => $validator->errors()
                 ]
-            ],421);
+            ],422);
         }
 
         //Проверка на имя пользователя
         if(!User::where('login', $request->login)->first()) {
             return response()->json([
                 'error' => [
-                    'message' => 'Пользователь не найден'
+                    'code' => 401,
+                    'errors' => ['login' => 'Incorrect login'],
+                    'message' => 'Unauthorized'
                 ]
-            ],421);
+            ],401);
         }
 
         // Проверка на правильность пароля
         if(!User::where('login', $request->login)->where('password',$request->password)->first()) {
             return response()->json([
                 'error' => [
-                    'message' => 'Пароль неверный'
+                    'code' => 401,
+                    'errors' => ['password' => 'Incorrect password'],
+                    'message' => 'Unauthorized'
                 ]
-            ],421);
+            ],401);
         }
         //Генерация токена, отправка клиенту и сохранение
         $token = Str::random(16);
@@ -89,8 +97,8 @@ class UserController extends Controller
     // check token for redirect
     public function checkToken(Request $request){
         if(User::where('token', $request->header('Authorization'))->first()) {
-            return response()->json([]);
+            return response()->json(['isCorrect' => true]);
         }
-        else return response()->json([],403);
+        else return response()->json(['isCorrect' => false]);
     }
 }

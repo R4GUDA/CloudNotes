@@ -26,12 +26,14 @@
                 </div>
             </div>
             <hr class="login__hr">
-            <div class="login__right">
-                <input class="login__login-input auth-input" placeholder="Login" type="text" name="" id="">
+            <form method="POST" class="login__right">
+                <input class="login__login-input auth-input" placeholder="Login" type="text">
+                <div class="login__error login-error"></div>
                 <input class="login__password-input auth-input" placeholder="Password" type="password">
-                <input id="login-btn" class="login__submit auth-btn" value="Sign in" type="button">
+                <div class="login__error password-error"></div>
+                <input id="login-btn" class="login__submit auth-btn" value="Sign in" type="submit">
                 <input class="login__register auth-btn auth-btn_sign-up" value="Sign up" type="button">
-            </div>
+            </form>
         </div>
     </section>
 </body>
