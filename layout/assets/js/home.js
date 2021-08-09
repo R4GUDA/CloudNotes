@@ -1,4 +1,4 @@
-import { card_rendering, get_cookie, delete_card, update_card, clear_cards, store_card } from "./modules.js"
+import { card_rendering, get_cookie, delete_card, update_card, clear_cards, store_card, search } from "./modules.js"
 
 let theme = 'All'
 
@@ -75,16 +75,12 @@ $('.notes__add-note').on('click', () => {
 })
 
 // search note
-$('.notes__search').on('click', () => {
-    axios('http://127.0.0.1:8000/api/search', {
-            method: 'post',
-            headers: { 'Authorization': get_cookie('token') },
-            data: { 'key_word': $('.notes__search-field').val() }
-        })
-        .then(function(response) {
-            clear_cards()
-            card_rendering(response.data)
-            delete_card(response.data)
-            update_card()
-        })
+$('.notes__search').on('click', function() {
+    search()
+})
+
+$('.notes__search-field').on('keyup', function(e) {
+    if (e.key === 'Enter' || e.keyCode === 13) {
+        search()
+    }
 })

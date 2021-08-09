@@ -74,7 +74,6 @@ export function update_func(obj) {
 }
 
 // clear cards
-
 export function clear_cards() {
     $('.notes__cards').empty()
 }
@@ -94,6 +93,20 @@ export function store_card(theme) {
             $('.note__title[data-id="new_note"]').attr('data-id', response.data[0])
             $('.note__close[data-id="new_note"]').attr('data-id', response.data[0])
             $('.note__content[data-id="new_note"]').attr('data-id', response.data[0])
+            delete_card(response.data)
+            update_card()
+        })
+}
+
+export function search() {
+    axios('http://127.0.0.1:8000/api/search', {
+            method: 'post',
+            headers: { 'Authorization': get_cookie('token') },
+            data: { 'key_word': $('.notes__search-field').val() }
+        })
+        .then(function(response) {
+            clear_cards()
+            card_rendering(response.data)
             delete_card(response.data)
             update_card()
         })
