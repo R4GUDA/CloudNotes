@@ -1,11 +1,16 @@
 .header {
     display: fixed;
-    width: 100%;
     background: var(--color-bg);
     margin-bottom: 64px;
 }
 
+.header__wrapper {
+    display: flex;
+    justify-content: center;
+}
+
 .header__inner {
+    width: 90%;
     display: flex;
     align-items: center;
     justify-content: space-between;
