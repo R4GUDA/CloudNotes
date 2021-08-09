@@ -11,6 +11,7 @@
     margin: 0 auto;
     width: 600px;
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
@@ -48,4 +49,17 @@
 
 .login__submit {
     margin-bottom: 16px;
+}
+
+@media (max-width:670px) {
+    .login__logo {
+        margin-bottom: 32px;
+    }
+    .login__inner {
+        flex-direction: column;
+    }
+    .login__hr {
+        display: none;
+    }
+    .login__right {}
 }
