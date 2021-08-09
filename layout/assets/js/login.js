@@ -107,7 +107,7 @@ $('.login__register').on('click', function() {
                             }, 2000)
                         }
                         if (error.response.data.error.errors.login == "The login must be at least 3 characters.") {
-                            $('.register-login-error').text("The username is too short")
+                            $('.register-login-error').text("The login is too short")
                             setTimeout(() => {
                                 $('.register-login-error').text("")
                             }, 2000)

@@ -80,12 +80,12 @@ export function clear_cards() {
 }
 
 // store empty card
-export function store_card() {
+export function store_card(theme) {
     axios('http://127.0.0.1:8000/api/store', {
             headers: { Authorization: get_cookie('token') },
             method: 'post',
             data: {
-                'theme': 'default',
+                'theme': theme,
                 'title': $('.note__title[data-id="new_note"]').val(),
                 'text': $('.note__text[data-id="new_note]').val()
             }

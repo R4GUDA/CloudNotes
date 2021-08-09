@@ -52,7 +52,6 @@ class NoteController extends Controller
 
     public function put(Request $request) {
         $validator = Validator::make($request->all(),[
-            'title' => 'required',
             'id' => 'required'
         ]);
 
@@ -65,7 +64,8 @@ class NoteController extends Controller
 
         $note = Note::find($request->id);
 
-        $note->title = $request->title;
+        if($request->title == "") $note->title = "";
+        else $note->title = $request->title;
         if($request->text == "") $note->text = "";
         else $note->text = $request->text;
 
@@ -81,5 +81,16 @@ class NoteController extends Controller
         $searchByText = Note::where('text','LIKE',"%" . $request->key_word . "%")->where('user_id', Auth::id())->get();
         $search = $searchByTitle->merge($searchByText);
         return response()->json($search);
+    }
+
+    public function theme(Request $request) {
+        $theme = Note::where('theme', $request->theme)->where('user_id', Auth::id())->get();
+        if($theme === null)
+            return response()->json(['empty' => true]);
+        else
+            return response()->json([
+                'empty' => false,
+                'notes' => $theme
+            ]);
     }
 }

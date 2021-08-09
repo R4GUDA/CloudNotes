@@ -1,5 +1,6 @@
 import { card_rendering, get_cookie, delete_card, update_card, clear_cards, store_card } from "./modules.js"
-// on load
+
+let theme = 'All'
 
 // redirect without token
 axios('http://127.0.0.1:8000/api/checkToken', {
@@ -7,10 +8,11 @@ axios('http://127.0.0.1:8000/api/checkToken', {
         headers: { 'Authorization': get_cookie('token') },
         data: {}
     })
-    .catch(function(error) {
-        if (error.response.status == 403) window.location.replace("/login.html")
+    .then(function(response) {
+        if (!response.data.isCorrect) window.location.replace("/login.html")
     })
 
+// render cards
 axios('http://127.0.0.1:8000/api/get', {
         method: "get",
         headers: { 'Authorization': get_cookie('token') }
@@ -20,6 +22,35 @@ axios('http://127.0.0.1:8000/api/get', {
         delete_card(response.data)
         update_card()
     })
+
+// themes
+$('.group-all').on('click', function() {
+    axios('http://127.0.0.1:8000/api/get', {
+            method: "get",
+            headers: { 'Authorization': get_cookie('token') }
+        })
+        .then(function(response) {
+            card_rendering(response.data)
+            delete_card(response.data)
+            update_card()
+        })
+})
+
+$('.group-another').on('click', function() {
+    theme = $(this).val()
+    axios(`http://127.0.0.1:8000/api/theme?theme=${theme}`, {
+            method: "get",
+            headers: { 'Authorization': get_cookie('token') }
+        })
+        .then(function(response) {
+            if (!response.data.empty) {
+                clear_cards()
+                card_rendering(response.data.notes)
+                delete_card(response.data.notes)
+                update_card()
+            }
+        })
+})
 
 
 // log-out
@@ -39,7 +70,7 @@ $('.notes__add-note').on('click', () => {
         <textarea placeholder="Content" data-id="new_note" class="note__content" name="" cols="30" rows="10"></textarea>
     <form>
     `)
-    store_card()
+    store_card(theme)
 })
 
 // search note
@@ -52,5 +83,7 @@ $('.notes__search').on('click', () => {
         .then(function(response) {
             clear_cards()
             card_rendering(response.data)
+            delete_card(response.data)
+            update_card()
         })
 })
