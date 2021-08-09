@@ -30,6 +30,7 @@ $('.group-all').on('click', function() {
             headers: { 'Authorization': get_cookie('token') }
         })
         .then(function(response) {
+            clear_cards()
             card_rendering(response.data)
             delete_card(response.data)
             update_card()
